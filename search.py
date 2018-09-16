@@ -133,7 +133,7 @@ def curr_path_cal(elevec, veclen):
 
 
 locations = data_create(lat_range = [32.018539, 31.018539], long_range =[77.510593, 77.61], elev_range = 600, datapoints = 3000)
-plot_map(locations, False, False)
+
 
 if len(locations) == 0:
     #client =
@@ -148,8 +148,7 @@ All_G = create_graph(locations)
 Shortest_path = search_shortest_path(All_G, locations, start_loc, exit_loc)
 K_Short_paths = k_shortest_paths(All_G, locations.index(start_loc), locations.index(exit_loc))
 
-plot_map(locations, False, True,pth=Shortest_path)
-alter_map(locations, Shortest_path)
+
 
 step_length = .3 #in metres - get from app
 window_len = 100 #window of no. of steps - get from app
@@ -175,6 +174,8 @@ for i in range(vector_length*2):
 current_path = curr_path_cal(pedo_elev_vector, vector_length)                      #sensor elevation vector
 
 Out = pattern_match(current_path, K_Short_paths, locations)
-
+alter_map(locations, Shortest_path, out=Out)
+plot_map(locations, False, False)
+plot_map(locations, False, True,pth=Shortest_path)
 print(Out) #take this output
 

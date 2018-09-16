@@ -37,6 +37,7 @@ def plot_map(data, point = False, path = False, start = 0, stop = 0, pth = 0):
         yp = np.array([i[1] for i in pth])
         zp = np.array([i[2] for i in pth])
         ax.scatter(xp, yp, zp, color='black');
+        plt.savefig('3dcontour_map_with_pathdots.png')
 
         for angle in range(0, 360):
             ax.view_init(30, angle)
@@ -45,13 +46,14 @@ def plot_map(data, point = False, path = False, start = 0, stop = 0, pth = 0):
         pass
 
     else:
+        plt.savefig('3dcontour_map.png')
         for angle in range(0, 360):
             ax.view_init(30, angle)
             plt.draw()
             plt.pause(.0001)
 
 
-def alter_map(data, pth):
+def alter_map(data, pth, out):
     x = np.array([i[0] for i in data])
     y = np.array([i[1] for i in data])
     z = np.array([i[2] for i in data])
@@ -80,5 +82,6 @@ def alter_map(data, pth):
     yp = np.array([i[1] for i in pth])
     zp = np.array([i[2] for i in pth])
     plt.scatter(xp, yp, zp, color='black');
-
+    plt.scatter(out[0], out[1], out[2], color = 'red')
+    plt.savefig('contour_map2d.png')
     plt.show()
