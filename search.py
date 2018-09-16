@@ -9,6 +9,8 @@ from itertools import islice
 import random
 import mpu
 import math
+from visual import plot_map
+from visual import alter_map
 
 def elevation(client, locations):
     """
@@ -131,6 +133,7 @@ def curr_path_cal(elevec, veclen):
 
 
 locations = data_create(lat_range = [32.018539, 31.018539], long_range =[77.510593, 77.61], elev_range = 600, datapoints = 3000)
+plot_map(locations, False, False)
 
 if len(locations) == 0:
     #client =
@@ -144,6 +147,9 @@ start_loc, exit_loc = locations[random.randint(0,len(locations))], locations[ran
 All_G = create_graph(locations)
 Shortest_path = search_shortest_path(All_G, locations, start_loc, exit_loc)
 K_Short_paths = k_shortest_paths(All_G, locations.index(start_loc), locations.index(exit_loc))
+
+plot_map(locations, False, True,pth=Shortest_path)
+alter_map(locations, Shortest_path)
 
 step_length = .3 #in metres - get from app
 window_len = 100 #window of no. of steps - get from app
